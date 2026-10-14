@@ -35,6 +35,15 @@ export default function WelcomeScreen() {
             Sign in
           </button>
         </div>
+
+        {/* Password reset lives on Microsoft's sign-in page (self-service
+            password reset, by emailed code) — this just says where to find it. */}
+        <p className="welcome-help">
+          <button type="button" className="link-button" onClick={signIn}>
+            Forgot your password?
+          </button>{' '}
+          Choose this, enter your email, then select <strong>Forgot password?</strong> to get a reset code by email.
+        </p>
       </div>
       <p className="welcome-foot">© Gravity Training (Pty) Ltd</p>
     </main>
