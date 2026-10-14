@@ -1,0 +1,11 @@
+node_modules
+dist
+.env.local
+.env.*.local
+.vs/
+.claude
+*.log
+
+# Manual PDFs never go to GitHub (the repo is public). They ship only inside
+# the API deploy. Source of truth: the SharePoint Manuals folder (README).
+api/manuals/*.pdf

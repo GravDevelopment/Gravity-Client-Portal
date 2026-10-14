@@ -1,0 +1,1002 @@
+/* Gravity client portal. Palette and tokens live in index.css. */
+
+/* Shell & top bar --------------------------------------------------------- */
+
+.shell {
+  min-height: 100vh;
+  background-color: var(--page);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.topbar-logo {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.topbar-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--border);
+}
+
+.topbar-product {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .topbar-inner {
+    padding: 0 16px;
+  }
+  .topbar-divider,
+  .topbar-product,
+  .topbar-name {
+    display: none;
+  }
+}
+
+/* Buttons ----------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn:focus-visible,
+.select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.btn-sm {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.btn-lg {
+  height: 48px;
+  font-size: 15px;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-dark);
+}
+
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--surface-alt);
+}
+
+.btn-ghost {
+  background: none;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  background-color: var(--surface-alt);
+}
+
+.btn-danger-ghost {
+  background: none;
+  color: var(--danger);
+  border-color: var(--danger-border);
+}
+
+.btn-danger-ghost:hover:not(:disabled) {
+  background-color: var(--danger-bg);
+}
+
+/* Page layout ------------------------------------------------------------- */
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.page-narrow {
+  max-width: 560px;
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 20px 16px 40px;
+    gap: 22px;
+  }
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.page-sub {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.page-sub strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.dot {
+  margin: 0 8px;
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.muted-text {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.center-screen,
+.center-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.center-screen {
+  min-height: 100vh;
+}
+
+.center-block {
+  min-height: 50vh;
+}
+
+/* Summary stats ----------------------------------------------------------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 800px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-valid {
+  border-top-color: var(--success);
+}
+
+.stat-expiring {
+  border-top-color: var(--warning);
+}
+
+.stat-expired {
+  border-top-color: var(--danger);
+}
+
+.stat-neutral {
+  border-top-color: var(--text-faint);
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Course cards ------------------------------------------------------------ */
+
+.course-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr));
+  gap: 16px;
+}
+
+.course-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.course-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.course-sub {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.badge-valid {
+  color: var(--success);
+  background-color: var(--success-bg);
+  border-color: var(--success-border);
+}
+
+.badge-expiring {
+  color: var(--warning);
+  background-color: var(--warning-bg);
+  border-color: var(--warning-border);
+}
+
+.badge-expired,
+.badge-fraudulent {
+  color: var(--danger);
+  background-color: var(--danger-bg);
+  border-color: var(--danger-border);
+}
+
+.badge-neutral {
+  color: var(--text-muted);
+  background-color: var(--surface-alt);
+  border-color: var(--border);
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.facts dt {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.facts dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.card-note a {
+  color: inherit;
+  font-weight: 600;
+}
+
+.card-note-warning {
+  color: var(--warning-text);
+  background-color: var(--warning-bg);
+}
+
+.card-note-danger {
+  color: var(--danger);
+  background-color: var(--danger-bg);
+}
+
+.card-foot {
+  margin-top: auto;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.manual-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Native <select> so it behaves properly on phones and with a keyboard. */
+.select {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.empty {
+  background-color: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Alerts ------------------------------------------------------------------ */
+
+.alert {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.alert a {
+  color: inherit;
+  font-weight: 600;
+}
+
+.alert-warning {
+  color: var(--warning-text);
+  background-color: var(--warning-bg);
+  border-color: var(--warning-border);
+}
+
+.alert-danger {
+  color: var(--danger);
+  background-color: var(--danger-bg);
+  border-color: var(--danger-border);
+}
+
+/* Help card --------------------------------------------------------------- */
+
+.help-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+}
+
+.help-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.help-card p {
+  margin: 0;
+}
+
+.help-links {
+  display: flex;
+  gap: 8px 20px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.help-links a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.help-links a:hover {
+  text-decoration: underline;
+}
+
+/* Details form ------------------------------------------------------------ */
+
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 32px;
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: 22px 18px;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.panel-sub {
+  margin: 8px 0 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.input {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.input-mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.input::placeholder {
+  color: var(--text-faint);
+  letter-spacing: normal;
+}
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-alt);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.checkbox input {
+  margin: 2px 0 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+.checkbox strong {
+  display: block;
+  font-weight: 600;
+}
+
+.checkbox-hint {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.danger-zone {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.danger-zone p {
+  margin: 2px 0 0;
+}
+
+/* Welcome (signed out) ---------------------------------------------------- */
+
+.welcome {
+  min-height: 100vh;
+  background-color: var(--page);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px 16px;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 36px 32px;
+}
+
+@media (max-width: 480px) {
+  .welcome-card {
+    padding: 28px 20px;
+  }
+}
+
+.welcome-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.welcome-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.welcome-sub {
+  margin: 6px 0 24px;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.features {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.features li {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.features strong {
+  display: block;
+  font-weight: 600;
+}
+
+.feature-tick {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.welcome-foot {
+  margin: 0;
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+/* Shared ------------------------------------------------------------------ */
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* PdfViewer's Previous/Next buttons. */
+.primary-button {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button:hover:not(:disabled) {
+  background-color: var(--accent-dark);
+}
+
+/* Manual viewer ---------------------------------------------------------- */
+
+.pdf-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  /* A fixed height, not min-height: the rail and the page each scroll on their
+     own, which they can't do inside a page that grows. */
+  height: 100vh;
+  background-color: var(--surface);
+  /* Nothing here is text, but stop the drag-to-save gesture on the canvas. */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pdf-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: var(--background);
+  border-bottom: 1.5px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.pdf-close {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+
+.pdf-title {
+  flex: 1;
+  /* Without this a flex child refuses to shrink below its text, so a long
+     course name would push the page count off a phone screen. */
+  min-width: 0;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pdf-count {
+  color: var(--text-muted);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.pdf-body {
+  display: flex;
+  flex: 1;
+  /* Without this a flex child won't shrink below its content, and the children
+     scroll the whole viewer instead of themselves. */
+  min-height: 0;
+}
+
+.pdf-rail {
+  flex: 0 0 132px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 8px;
+  background-color: var(--background);
+  border-right: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pdf-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.pdf-thumb:hover {
+  border-color: var(--border);
+}
+
+.pdf-thumb.is-active {
+  border-color: var(--accent);
+}
+
+.pdf-thumb-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 24px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+}
+
+.pdf-thumb-number {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pdf-thumb.is-active .pdf-thumb-number {
+  color: var(--accent);
+}
+
+.pdf-stage {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.pdf-stage > .pdf-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* On a phone the rail goes under the bar as a horizontal strip — a 132px
+   column would eat a third of the screen. */
+@media (max-width: 719px) {
+  .pdf-body {
+    flex-direction: column;
+  }
+
+  .pdf-rail {
+    flex: 0 0 auto;
+    flex-direction: row;
+    max-height: 116px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-right: none;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .pdf-thumb {
+    width: 76px;
+  }
+}
+
+.pdf-page {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.pdf-error {
+  color: var(--danger);
+  font-weight: 600;
+  text-align: center;
+  padding: 40px 16px;
+}
+
+.pdf-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 12px 16px 24px;
+}
+
+.pdf-nav .primary-button {
+  min-width: 130px;
+}
+
+.pdf-nav .primary-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Manuals are view-only. Printing the page (or "save as PDF" through the print
+   dialog) would be a way around that, so print nothing but a note. */
+@media print {
+  body * {
+    display: none !important;
+  }
+
+  body::after {
+    content: 'Gravity training manuals are view-only and cannot be printed.';
+    display: block !important;
+    font-family: inherit;
+    font-size: 14pt;
+    padding: 40pt;
+  }
+}

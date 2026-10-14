@@ -1,0 +1,21 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "TENANT_ID": "<from the kiosk / gravity-manuals-api settings>",
+    "CLIENT_ID": "<from the kiosk / gravity-manuals-api settings>",
+    "CLIENT_SECRET": "<from the kiosk / gravity-manuals-api settings>",
+    "DATAVERSE_URL": "<from the kiosk / gravity-manuals-api settings>",
+    "MANUAL_TOKEN_SECRET": "<any long random string>",
+    "ENTRA_TENANT_ID": "8d7d084d-a945-4a07-bb68-b26a407c6a48",
+    "ENTRA_CLIENT_ID": "8e0023d3-f9e9-4fdb-a089-dcb8a3000234",
+    "PORTAL_URL": "http://localhost:59640",
+    "MAIL_FROM": "certification@gravitygh.co.za",
+    "MAIL_CLIENT_ID": "<Gravity Portal Mailer app (client) ID>",
+    "MAIL_CLIENT_SECRET": "<its client secret>"
+  },
+  "Host": {
+    "CORS": "http://localhost:59640"
+  }
+}

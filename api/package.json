@@ -1,0 +1,26 @@
+{
+  "name": "gravity-portal-api",
+  "version": "1.0.0",
+  "description": "Azure Function backend for the Gravity client portal: sign-in, profiles, certificates, manuals and expiry reminders.",
+  "main": "dist/src/functions/*.js",
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc && node dist/src/token.check.js && node dist/src/manual.check.js && node dist/src/certificates.check.js && node dist/src/reminders.check.js",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\"",
+    "storage": "azurite --silent --location .azurite --skipApiVersionCheck"
+  },
+  "dependencies": {
+    "@azure/data-tables": "^13.3.2",
+    "@azure/functions": "^4.0.0",
+    "@azure/msal-node": "^5.3.1",
+    "jose": "^5.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "azurite": "^3.37.0",
+    "typescript": "^5.9.3"
+  }
+}

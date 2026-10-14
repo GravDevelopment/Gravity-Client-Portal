@@ -1,0 +1,55 @@
+:root {
+  /* Gravity red, on a neutral grey-blue scale. */
+  --accent: #d32027;
+  --accent-dark: #a91920;
+  --accent-soft: #fdecec;
+  --accent-ring: rgba(211, 32, 39, 0.16);
+
+  --page: #f5f6f8;
+  --surface: #ffffff;
+  --surface-alt: #f9fafb;
+  --background: #ffffff; /* used by the manual viewer */
+  --border: #e4e7ec;
+  --border-strong: #d0d5dd;
+  --text: #101828;
+  --text-muted: #5d6676;
+  --text-faint: #98a2b3;
+  --text-on-accent: #ffffff;
+
+  --success: #067647;
+  --success-bg: #ecfdf3;
+  --success-border: #abefc6;
+  --warning: #b54708;
+  --warning-text: #93370d;
+  --warning-bg: #fffaeb;
+  --warning-border: #fedf89;
+  --danger: #b42318;
+  --danger-bg: #fef3f2;
+  --danger-border: #fecdca;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 12px 24px -6px rgba(16, 24, 40, 0.1), 0 4px 8px -4px rgba(16, 24, 40, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--page);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
