@@ -34,10 +34,7 @@ export async function startAuth() {
   return account;
 }
 
-// prompt=login: always the "enter your email" page, never Microsoft's account
-// picker — which lists accounts by their internal <guid>@<tenant>.onmicrosoft.com
-// name, not the client's email.
-export const signIn = () => msal.loginRedirect({ scopes, prompt: 'login' });
+export const signIn = () => msal.loginRedirect({ scopes });
 export const signUp = () => msal.loginRedirect({ scopes, prompt: 'create' });
 export const signOut = () => msal.logoutRedirect();
 
