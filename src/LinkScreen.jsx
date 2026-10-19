@@ -90,7 +90,7 @@ export default function LinkScreen({ current, suggestedEmail, onSaved, onCancel 
           {error && (
             <div className="alert alert-danger" role="alert">
               {error}{' '}
-              <a href={supportMailto('Client portal — connecting my ID')}>Contact {SUPPORT_EMAIL}</a>
+              <a href={supportMailto('Candidate portal — connecting my ID')}>Contact {SUPPORT_EMAIL}</a>
             </div>
           )}
 

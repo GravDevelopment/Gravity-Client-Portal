@@ -49,6 +49,6 @@ export function reminderEmail(to: string, cert: Certificate, today: string, port
 <p>To stay certified, please book your recertification with us before then — reply to this email or call +27 12 349 1318.</p>
 <p>You can see all your certificates and manuals at <a href="${escape(portalUrl)}">${escape(portalUrl)}</a>.</p>
 <p>Gravity Training</p>
-<p style="color:#666;font-size:12px">You are getting this because reminders are switched on in your Gravity client portal profile. You can switch them off there.</p>`,
+<p style="color:#666;font-size:12px">You are getting this because reminders are switched on in your Gravity candidate portal profile. You can switch them off there.</p>`,
   };
 }

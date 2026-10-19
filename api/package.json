@@ -1,7 +1,7 @@
 {
   "name": "gravity-portal-api",
   "version": "1.0.0",
-  "description": "Azure Function backend for the Gravity client portal: sign-in, profiles, certificates, manuals and expiry reminders.",
+  "description": "Azure Function backend for the Gravity candidate portal: sign-in, profiles, certificates, manuals and expiry reminders.",
   "main": "dist/src/functions/*.js",
   "scripts": {
     "build": "tsc",

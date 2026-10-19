@@ -12,7 +12,7 @@ export default function WelcomeScreen() {
     <main className="welcome">
       <div className="welcome-card">
         <img src={logo} alt="Gravity Training" className="welcome-logo" />
-        <h1 className="welcome-title">Client portal</h1>
+        <h1 className="welcome-title">Candidate portal</h1>
         <p className="welcome-sub">Your Gravity Training certificates and manuals, in one place.</p>
 
         <ul className="features">

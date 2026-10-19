@@ -9,7 +9,7 @@ export default function AppHeader({ name }) {
         <div className="topbar-brand">
           <img src={logo} alt="Gravity Training" className="topbar-logo" />
           <span className="topbar-divider" aria-hidden="true" />
-          <span className="topbar-product">Client portal</span>
+          <span className="topbar-product">Candidate portal</span>
         </div>
         <div className="topbar-user">
           {name && <span className="topbar-name">{name}</span>}

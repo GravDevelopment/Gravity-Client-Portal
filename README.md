@@ -1,4 +1,4 @@
-# Gravity Client Portal
+# Gravity Candidate Portal
 
 Clients create a profile, connect it to their ID number, and see their Gravity
 Training **certificates** (valid / expiring / expired / flagged) and the

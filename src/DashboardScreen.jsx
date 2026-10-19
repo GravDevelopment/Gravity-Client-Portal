@@ -228,7 +228,7 @@ export default function DashboardScreen({ profile, certificates, trainings, disp
           <p className="muted-text">Our certification team can help with certificates, manuals and recertification.</p>
         </div>
         <div className="help-links">
-          <a href={supportMailto('Client portal — help')}>{SUPPORT_EMAIL}</a>
+          <a href={supportMailto('Candidate portal — help')}>{SUPPORT_EMAIL}</a>
           {SUPPORT_PHONES.map((n) => (
             <a key={n} href={tel(n)}>
               {n}
