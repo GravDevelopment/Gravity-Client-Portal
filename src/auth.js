@@ -7,7 +7,7 @@ const clientId = import.meta.env.VITE_ENTRA_CLIENT_ID;
 const authority = import.meta.env.VITE_ENTRA_AUTHORITY; // https://<tenant-id>.ciamlogin.com/<tenant-id>
 
 // Must match a SPA redirect URI on the app registration exactly:
-// http://localhost:59640 locally, https://gravdevelopment.github.io/Gravity-Client-Portal/ on Pages.
+// http://localhost:59640 locally, https://gravitycandidateportal.co.za live.
 const base = import.meta.env.BASE_URL;
 const redirectUri = base === '/' ? window.location.origin : window.location.origin + base;
 

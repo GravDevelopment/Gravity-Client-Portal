@@ -105,11 +105,24 @@ npm run check            # pairing, certificate status
 cd api && npm run check  # manual tokens, view-only guard, certificate mapping, reminder rules
 ```
 
-## Deploy (not done yet)
+## Deploy
 
-1. A Function App for `api/` (Node 20+), with the settings above, `PORTAL_URL`
-   and CORS set to the live domain. `cd api && func azure functionapp publish <name>`.
-2. Add the live domain as a **SPA redirect URI** on the *Gravity Client Portal*
-   app registration.
-3. Host the front end (GitHub Pages workflow in [.github/workflows/pages.yml](.github/workflows/pages.yml)),
-   `public/CNAME` with the domain, DNS pointed at it.
+Live at **https://gravitycandidateportal.co.za**.
+
+1. A Function App for `api/` (Node 20+), with the settings above,
+   `PORTAL_URL=https://gravitycandidateportal.co.za` and CORS allowing that
+   origin. `cd api && func azure functionapp publish <name>`.
+2. `https://gravitycandidateportal.co.za` (no trailing slash) is a **SPA
+   redirect URI** on the *Gravity Client Portal* app registration.
+3. The front end is served by GitHub Pages from **`main` / `/docs`** (Settings →
+   Pages → Deploy from a branch), custom domain set, HTTPS enforced. Nothing is
+   built on GitHub: the built site is committed. To release:
+
+   ```
+   npm run check
+   npm run build      # writes docs/ (emptied first; CNAME and .nojekyll come from public/)
+   git add docs && git commit -m "Build" && git push
+   ```
+
+   DNS: apex A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
+   `185.199.111.153`; optional `www` CNAME to `gravdevelopment.github.io`.
