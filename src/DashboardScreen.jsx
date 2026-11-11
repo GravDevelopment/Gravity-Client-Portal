@@ -117,7 +117,7 @@ function CourseCard({ card, onOpen }) {
               <dd>{formatDate(certificate.dateIssued)}</dd>
             </div>
             <div>
-              <dt>Recertification date</dt>
+              <dt>Revalidation date</dt>
               <dd>{formatDate(certificate.revalidationDate)}</dd>
             </div>
           </>
