@@ -53,7 +53,7 @@ function StatusNote({ status }) {
 // Why there's no manual to open. The API only issues links for a course the
 // learner is marked Competent on and whose certificate is still current.
 function manualNotice(training, status) {
-  if (status?.kind === 'expired' || status?.kind === 'fraudulent') return 'Manual unavailable � certificate not current';
+  if (status?.kind === 'expired' || status?.kind === 'fraudulent') return 'Manual unavailable — certificate not current';
   if (training.competent) return 'Manual not available yet';
   if (training.status === 'In Training') return 'Manual available once marked competent';
   return 'No manual — not marked competent';
