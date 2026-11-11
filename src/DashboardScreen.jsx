@@ -51,8 +51,9 @@ function StatusNote({ status }) {
 }
 
 // Why there's no manual to open. The API only issues links for a course the
-// learner is marked Competent on, so say which of those two it is.
-function manualNotice(training) {
+// learner is marked Competent on and whose certificate is still current.
+function manualNotice(training, status) {
+  if (status?.kind === 'expired' || status?.kind === 'fraudulent') return 'Manual unavailable — certificate not current';
   if (training.competent) return 'Manual not available yet';
   if (training.status === 'In Training') return 'Manual available once marked competent';
   return 'No manual â€” not marked competent';
@@ -116,7 +117,7 @@ function CourseCard({ card, onOpen }) {
               <dd>{formatDate(certificate.dateIssued)}</dd>
             </div>
             <div>
-              <dt>Expires</dt>
+              <dt>Recertification date</dt>
               <dd>{formatDate(certificate.revalidationDate)}</dd>
             </div>
           </>
@@ -129,12 +130,6 @@ function CourseCard({ card, onOpen }) {
               : 'Not on record'}
           </dd>
         </div>
-        {training?.status && (
-          <div>
-            <dt>Result</dt>
-            <dd>{training.status}</dd>
-          </div>
-        )}
       </dl>
 
       {status && <StatusNote status={status} />}
@@ -143,7 +138,7 @@ function CourseCard({ card, onOpen }) {
         {manuals.length > 0 ? (
           <ManualLinks manuals={manuals} courseName={card.courseName || 'Manual'} onOpen={onOpen} />
         ) : (
-          training && <span className="muted-text">{manualNotice(training)}</span>
+          training && <span className="muted-text">{manualNotice(training, status)}</span>
         )}
       </div>
     </li>

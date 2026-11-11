@@ -3,6 +3,7 @@ import { signedInUser, Unauthorized } from "../auth";
 import { searchCertificatesByIdNumber, searchTrainingsByLearnerId } from "../dataverse";
 import { manualsFor } from "../manuals";
 import { deleteProfile, getProfile, saveProfile } from "../profiles";
+import { daysUntil, todaySA } from "../reminders";
 import { mintManualToken } from "../token";
 
 // Same shapes the ID-number field accepts: letters, digits, "/" and "-".
@@ -76,18 +77,30 @@ async function read(userId: string, context: InvocationContext): Promise<HttpRes
   if (certificates.status === "rejected") context.error("certificates lookup failed", certificates.reason);
   if (trainings.status === "rejected") context.error("trainings lookup failed", trainings.reason);
 
+  // No manuals for a course whose certificate has expired or is flagged. If the
+  // certificates can't be read we can't tell, so no manuals at all (fail closed).
+  const today = todaySA();
+  const lapsed = new Set(
+    certificates.status === "fulfilled"
+      ? certificates.value
+          .filter((c) => c.fraudulent || (daysUntil(c.revalidationDate, today) ?? 0) < 0)
+          .map((c) => c.enrollId)
+      : [],
+  );
+  const mayRead = (enrollId: string) => certificates.status === "fulfilled" && !lapsed.has(enrollId);
+
   return {
     status: 200,
     jsonBody: {
       profile,
       certificates: certificates.status === "fulfilled" ? certificates.value : null,
-      // Only a Competent enrolment gets manual links, one per language.
+      // Only a Competent enrolment with a current certificate gets manual links, one per language.
       // Filenames never leave the API — the browser only sees signed tokens.
       trainings:
         trainings.status === "fulfilled"
           ? trainings.value.map((t) => ({
               ...t,
-              manuals: t.competent
+              manuals: t.competent && mayRead(t.enrollId)
                 ? manualsFor(t.courseName).map(({ lang, label, file }) => ({ lang, label, token: mintManualToken(file) }))
                 : [],
             }))
