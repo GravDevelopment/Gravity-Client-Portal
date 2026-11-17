@@ -2,7 +2,7 @@ import { signIn, signUp } from './auth';
 import logo from './assets/logo.png';
 
 const FEATURES = [
-  ['Certificates', 'See every course, with its issue date and revalidation date.'],
+  ['Courses', 'See every course, with its issue date and revalidation date.'],
   ['Training manuals', 'Read the manuals for the courses you passed.'],
   ['Revalidation reminders', 'Receive an email 90 days before a certificate needs revalidation.'],
 ];
