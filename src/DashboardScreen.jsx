@@ -19,7 +19,7 @@ function StatusBadge({ status }) {
     kind === 'fraudulent'
       ? 'Flagged'
       : kind === 'expired'
-        ? 'Expired'
+        ? 'Renewal overdue'
         : kind === 'expiring'
           ? daysLeft === 0
             ? 'Expires today'
