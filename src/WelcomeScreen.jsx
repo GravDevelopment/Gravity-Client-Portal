@@ -2,7 +2,7 @@ import { signIn, signUp } from './auth';
 import logo from './assets/logo.png';
 
 const FEATURES = [
-  ['Certificates', 'See every certificate, with its issue and expiry date.'],
+  ['Certificates', 'See every course, with its issue date and revalidation date.'],
   ['Training manuals', 'Read the manuals for the courses you passed.'],
   ['Expiry reminders', 'Get an email 90 days before a certificate expires.'],
 ];
