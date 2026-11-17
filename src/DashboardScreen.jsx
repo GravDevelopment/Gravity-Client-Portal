@@ -190,7 +190,7 @@ export default function DashboardScreen({ profile, certificates, trainings, disp
 
       <section className="stats" aria-label="Summary">
         <Stat value={counts.valid} label="Valid" tone="valid" />
-        <Stat value={counts.expiring} label="Expiring within 90 days" tone="expiring" />
+        <Stat value={counts.expiring} label="Renewal within 90 days" tone="expiring" />
         <Stat value={counts.expired + counts.fraudulent} label="Expired or flagged" tone="expired" />
         <Stat value={manualCount} label={manualCount === 1 ? 'Manual available' : 'Manuals available'} tone="neutral" />
       </section>
