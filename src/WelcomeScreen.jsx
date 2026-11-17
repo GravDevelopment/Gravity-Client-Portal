@@ -13,7 +13,7 @@ export default function WelcomeScreen() {
       <div className="welcome-card">
         <img src={logo} alt="Gravity Training" className="welcome-logo" />
         <h1 className="welcome-title">Candidate portal</h1>
-        <p className="welcome-sub">Your Gravity Training certificates and manuals, in one place.</p>
+        <p className="welcome-sub">Your Gravity Training Courses and Manuals, in one place.</p>
 
         <ul className="features">
           {FEATURES.map(([title, text]) => (
