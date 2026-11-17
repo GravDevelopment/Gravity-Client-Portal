@@ -174,13 +174,7 @@ export default function DashboardScreen({ profile, certificates, trainings, disp
           <p className="page-sub">
             ID number <strong>{profile.idNumber}</strong>
             <span className="dot" aria-hidden="true">·</span>
-            {profile.remindersEnabled ? (
-              <>
-                Reminders to <strong>{profile.email}</strong>
-              </>
-            ) : (
-              'Expiry reminders off'
-            )}
+            Reminders to <strong>{profile.email}</strong>
           </p>
         </div>
         <button type="button" className="btn btn-secondary" onClick={onEditDetails}>

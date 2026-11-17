@@ -59,7 +59,7 @@ async function link(userId: string, request: HttpRequest): Promise<HttpResponseI
     userId,
     idNumber,
     email,
-    remindersEnabled: body.remindersEnabled !== false,
+    remindersEnabled: true,
     linkedAt: existing?.idNumber === idNumber ? existing.linkedAt : new Date().toISOString(),
   });
   return { status: 204 };

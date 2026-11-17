@@ -71,7 +71,8 @@ export async function listReminderProfiles(): Promise<Profile[]> {
   const client = await ready("profiles");
   for await (const e of client.listEntities({ queryOptions: { filter: `PartitionKey eq '${PARTITION}'` } })) {
     const profile = toProfile(e);
-    if (profile.remindersEnabled && profile.email) out.push(profile);
+    // Reminders are mandatory: an older profile's remindersEnabled=false is ignored.
+    if (profile.email) out.push(profile);
   }
   return out;
 }

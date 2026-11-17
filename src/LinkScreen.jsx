@@ -9,7 +9,6 @@ import { SUPPORT_EMAIL, supportMailto } from './support';
 export default function LinkScreen({ current, suggestedEmail, onSaved, onCancel }) {
   const [idNumber, setIdNumber] = useState(current?.idNumber ?? '');
   const [email, setEmail] = useState(current?.email ?? suggestedEmail ?? '');
-  const [reminders, setReminders] = useState(current?.remindersEnabled ?? true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
 
@@ -28,7 +27,7 @@ export default function LinkScreen({ current, suggestedEmail, onSaved, onCancel 
   function submit(event) {
     event.preventDefault();
     if (!idNumber.trim() || !email.trim() || busy) return;
-    run(() => saveLink({ idNumber: idNumber.trim(), email: email.trim(), remindersEnabled: reminders }));
+    run(() => saveLink({ idNumber: idNumber.trim(), email: email.trim() }));
   }
 
   function unlink() {
@@ -42,7 +41,7 @@ export default function LinkScreen({ current, suggestedEmail, onSaved, onCancel 
         <h1 className="panel-title">{current ? 'Your details' : 'Connect your ID number'}</h1>
         <p className="panel-sub">
           {current
-            ? 'Change the ID number linked to your profile, or where expiry reminders are sent.'
+            ? 'Change the ID number linked to your profile, or where revalidation reminders are sent.'
             : 'We use it to find your certificates and training manuals. Enter it exactly as it appears on your certificate.'}
         </p>
 
@@ -78,14 +77,6 @@ export default function LinkScreen({ current, suggestedEmail, onSaved, onCancel 
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-
-          <label className="checkbox">
-            <input type="checkbox" checked={reminders} onChange={(e) => setReminders(e.target.checked)} />
-            <span>
-              <strong>Email me before a certificate expires</strong>
-              <span className="checkbox-hint">One reminder, 90 days before the expiry date.</span>
-            </span>
-          </label>
 
           {error && (
             <div className="alert alert-danger" role="alert">
