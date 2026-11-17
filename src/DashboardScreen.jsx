@@ -41,7 +41,7 @@ function StatusNote({ status }) {
   if (status.kind === 'expired' || status.kind === 'expiring') {
     return (
       <p className="card-note card-note-warning">
-        {status.kind === 'expired' ? 'This certificate has expired.' : 'Book your recertification before it expires.'}{' '}
+        {status.kind === 'expired' ? 'Certificate is due for renewal.' : 'Book your recertification before it expires.'}{' '}
         Call <a href={tel(SUPPORT_PHONE)}>{SUPPORT_PHONE}</a> or{' '}
         <a href={supportMailto('Recertification booking')}>email us</a>.
       </p>
