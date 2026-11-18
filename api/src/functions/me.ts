@@ -1,6 +1,6 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
 import { signedInUser, Unauthorized } from "../auth";
-import { searchCertificatesByIdNumber, searchTrainingsByLearnerId } from "../dataverse";
+import { searchCertificatesByIdNumber, searchTrainingsByLearnerId, withHubCertificates } from "../dataverse";
 import { manualsFor } from "../manuals";
 import { deleteProfile, getProfile, saveProfile } from "../profiles";
 import { daysUntil, todaySA } from "../reminders";
@@ -76,29 +76,33 @@ async function read(userId: string, context: InvocationContext): Promise<HttpRes
   ]);
   if (certificates.status === "rejected") context.error("certificates lookup failed", certificates.reason);
   if (trainings.status === "rejected") context.error("trainings lookup failed", trainings.reason);
+  const certificateList =
+    certificates.status === "fulfilled"
+      ? withHubCertificates(certificates.value, trainings.status === "fulfilled" ? trainings.value : [])
+      : null;
 
   // No manuals for a course whose certificate has expired or is flagged. If the
   // certificates can't be read we can't tell, so no manuals at all (fail closed).
   const today = todaySA();
   const lapsed = new Set(
-    certificates.status === "fulfilled"
-      ? certificates.value
+    certificateList
+      ? certificateList
           .filter((c) => c.fraudulent || (daysUntil(c.revalidationDate, today) ?? 0) < 0)
           .map((c) => c.enrollId)
       : [],
   );
-  const mayRead = (enrollId: string) => certificates.status === "fulfilled" && !lapsed.has(enrollId);
+  const mayRead = (enrollId: string) => certificateList !== null && !lapsed.has(enrollId);
 
   return {
     status: 200,
     jsonBody: {
       profile,
-      certificates: certificates.status === "fulfilled" ? certificates.value : null,
+      certificates: certificateList,
       // Only a Competent enrolment with a current certificate gets manual links, one per language.
       // Filenames never leave the API — the browser only sees signed tokens.
       trainings:
         trainings.status === "fulfilled"
-          ? trainings.value.map((t) => ({
+          ? trainings.value.map(({ hubCertificate, ...t }) => ({
               ...t,
               manuals: t.competent && mayRead(t.enrollId)
                 ? manualsFor(t.courseName).map(({ lang, label, file }) => ({ lang, label, token: mintManualToken(file) }))

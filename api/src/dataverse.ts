@@ -62,6 +62,8 @@ export interface Training {
   endDate: string | null;
   status: string | null;
   competent: boolean;
+  /** The certificate as the booking hub records it on the enrolment, once issued. */
+  hubCertificate: { number: string; dateIssued: string; revalidationDate: string } | null;
 }
 
 // tct_assessmentstatus option set. tct_passfail looks like the field for this
@@ -96,7 +98,54 @@ function mapRow(row: any, course: CourseRow, booking: BookingRow): Training {
     designation: course.grav_designation ?? null,
     startDate: booking.grav_startdate ? String(booking.grav_startdate).slice(0, 10) : null,
     endDate: booking.grav_enddate ? String(booking.grav_enddate).slice(0, 10) : null,
+    // grav_certdate is text ("2026/02/10"); grav_revalidationdate is a real date.
+    // Since Oct 2026 some issued certificates have a date but no number yet.
+    hubCertificate: row.grav_certificatenumber || row.grav_certdate
+      ? {
+          number: row.grav_certificatenumber ? String(row.grav_certificatenumber) : "",
+          dateIssued: row.grav_certdate ? String(row.grav_certdate).slice(0, 10).replace(/\//g, "-") : "",
+          revalidationDate: row.grav_revalidationdate ? String(row.grav_revalidationdate).slice(0, 10) : "",
+        }
+      : null,
   };
+}
+
+/**
+ * The booking hub is the source of truth for certificates: it records each one
+ * on the enrolment, but not every certificate is copied to grav_validation, and
+ * since Oct 2026 most copies lack the revalidation date. So: fill missing dates
+ * on grav_validation certificates from their enrolment, and add a certificate
+ * for every issued enrolment that has none there. grav_validation is still
+ * where the fraud flag lives.
+ */
+export function withHubCertificates(certificates: Certificate[], trainings: Training[]): Certificate[] {
+  const out = certificates.map((c) => ({ ...c }));
+  for (const t of trainings) {
+    const hub = t.hubCertificate;
+    if (!hub) continue;
+    // Linked by enrolment, or an unlinked copy issued the same day.
+    const copy =
+      out.find((c) => c.enrollId === t.enrollId) ??
+      out.find((c) => !c.enrollId && hub.dateIssued && c.dateIssued === hub.dateIssued);
+    if (copy) {
+      copy.enrollId = t.enrollId;
+      copy.dateIssued ||= hub.dateIssued;
+      copy.revalidationDate ||= hub.revalidationDate;
+    } else {
+      out.push({
+        certificateId: "",
+        enrollId: t.enrollId,
+        idNumber: "",
+        name: t.firstName,
+        surname: t.lastName,
+        course: t.designation || t.courseName || "",
+        dateIssued: hub.dateIssued,
+        revalidationDate: hub.revalidationDate,
+        fraudulent: false,
+      });
+    }
+  }
+  return out;
 }
 
 // Dataverse's URL entity-set names (e.g. "grav_courses" vs "grav_courseSet" vs
